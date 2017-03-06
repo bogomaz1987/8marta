@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>8 марта</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href='{% static "favicon.ico" %}'/>
+    <link rel="stylesheet" href='{% static "css/fonts.css" %}'/>
+    <link rel="stylesheet" href='{% static "css/main.css" %}'/>
+</head>
+<body>
+
+{% if message %}
+    <p class="error">{{ message }}</p>
+{% endif %}
+
+<div class="wrapper">
+
+    <h1 class="second_headig">Дорогая, {{ girl }}!</h1>
+    <p class="advice">Почувствуй нашу любовь! Загадай любое желание и оно в миг исполнится. <br> Но помни, ровно в 16:00 виртуальный бар станет явью...</p>
+
+    <form action="/main/" method="post" class="second_form">
+    {% csrf_token %}
+        <h3 class="second_form_heading">Чего бы тебе сейчас хотелось? :)</h3>
+        {% for i in gifts %}
+            <div class="input_block">
+                <input class="radio" id="input-{{ i.id }}" name="gifts" type="radio" value="{{ i.id }}" {% if forloop.counter == 1 %}checked{% endif %}>
+                <label for="input-{{ i.id }}">{{ i.name }}</label>
+                <p class="form_par">{{ i.description }}</p>
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Заказать" class="second_button">
+    </form>
+
+</div>
+
+</body>
+</html>

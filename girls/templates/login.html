@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>8 марта</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href='{% static "favicon.ico" %}'/>
+    <link rel="stylesheet" href='{% static "css/fonts.css" %}'/>
+    <link rel="stylesheet" href='{% static "css/main.css" %}'/>
+</head>
+<body>
+
+{% if message %}
+    <p class="error">{{ message }}</p>
+{% endif %}
+
+<div class="wrapper">
+    <h1 class="main-heading">
+        <span class="heading-mod">Привет! Ты зашла в</span><br>
+        Бар исполнения желаний
+    </h1>
+    <p class="advice">Введи свой id и получи удовольствие :)</p>
+    <img src='{% static "img/3.png" %}' class="arrow">
+        <form action="/" method="post" class="main-form">
+            {% csrf_token %}
+            <h2 class="form-heading">Вход только по приглашениям!</h2>
+            <div class="input_wrapper">
+                <label for="txt">Введи свой id</label>
+                <input id="txt" type="text" name="code"> и
+                <input type="submit" value="Поехали!">
+            </div>
+        </form>
+        <p class="advice"><br><br><br>Cегодня я в твоем распоряжении! Доминируй и властвуй!</p>
+</div>
+
+</body>
+</html>
